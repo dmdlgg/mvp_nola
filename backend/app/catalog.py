@@ -1,0 +1,16 @@
+CATALOG = {
+    "leite integral": {"unidade_padrao": "caixa"},
+    "leite": {"unidade_padrao": "caixa"},
+    "refrigerante cola": {"unidade_padrao": "garrafa"},
+    "refrigerante": {"unidade_padrao": "garrafa"},
+    "arroz tipo 1": {"unidade_padrao": "kg"},
+    "arroz": {"unidade_padrao": "kg"},
+    "feijão": {"unidade_padrao": "kg"},
+    "açúcar": {"unidade_padrao": "kg"},
+    "café": {"unidade_padrao": "pacote"},
+    "óleo de soja": {"unidade_padrao": "garrafa"},
+    "óleo": {"unidade_padrao": "garrafa"},
+    "macarrão": {"unidade_padrao": "pacote"},
+    "farinha de trigo": {"unidade_padrao": "kg"},
+    "sal": {"unidade_padrao": "kg"},
+}
