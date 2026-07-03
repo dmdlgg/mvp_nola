@@ -10,6 +10,13 @@ const views = {
   SETTINGS: 'settings',
 }
 
+const navItems = [
+  { key: views.CHAT, label: 'Novo pedido' },
+  { key: views.ORDERS, label: 'Pedidos' },
+  { key: views.HISTORY, label: 'Histórico' },
+  { key: views.SETTINGS, label: 'Configurações' },
+]
+
 const demoText = `Oi, tudo bem? Preciso de:
 5 caixas de leite integral
 12 refrigerantes cola 2L
@@ -253,6 +260,12 @@ function App() {
     }))
   }
 
+  function changeView(nextView) {
+    setView(nextView)
+    if (nextView === views.ORDERS) fetchOrders()
+    if (nextView === views.HISTORY) fetchHistory()
+  }
+
   function renderOrderBubble(msg, msgIndex) {
     const label = confidenceLabel(msg.data.confidence)
     const isApproved = approvedIds.has(msg.data.id)
@@ -363,18 +376,15 @@ function App() {
           </div>
         </div>
         <nav>
-          <button className={`nav-item ${view === views.CHAT ? 'active' : ''}`} onClick={() => setView(views.CHAT)}>
-            Novo pedido
-          </button>
-          <button className={`nav-item ${view === views.ORDERS ? 'active' : ''}`} onClick={() => { setView(views.ORDERS); fetchOrders() }}>
-            Pedidos
-          </button>
-          <button className={`nav-item ${view === views.HISTORY ? 'active' : ''}`} onClick={() => { setView(views.HISTORY); fetchHistory() }}>
-            Histórico
-          </button>
-          <button className={`nav-item ${view === views.SETTINGS ? 'active' : ''}`} onClick={() => setView(views.SETTINGS)}>
-            Configurações
-          </button>
+          {navItems.map((item) => (
+            <button
+              key={item.key}
+              className={`nav-item ${view === item.key ? 'active' : ''}`}
+              onClick={() => changeView(item.key)}
+            >
+              {item.label}
+            </button>
+          ))}
         </nav>
         <footer className="sidebar-footer">
           <span>v1.0 · MVP</span>
@@ -382,6 +392,18 @@ function App() {
       </aside>
 
       <main className="content">
+        <div className="mobile-nav" role="tablist" aria-label="Navegação principal">
+          {navItems.map((item) => (
+            <button
+              key={item.key}
+              className={`mobile-nav-item ${view === item.key ? 'active' : ''}`}
+              onClick={() => changeView(item.key)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+
         {view === views.CHAT && (
           <>
             <header className="topbar">
